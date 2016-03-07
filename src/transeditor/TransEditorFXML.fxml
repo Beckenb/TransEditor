@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="transeditor.TransEditorFXMLController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenFile" text="Open file">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem fx:id="menuSave" disable="true" mnemonicParsing="false" onAction="#handleWriteFile" text="Save">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleSaveFile" text="Save As" />
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Image">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#handleOpenImage" text="Open image" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlePDFImport" text="Open PDF" />
+                        <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom in">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="PLUS" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom out">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="MINUS" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Unicodes">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#saveUnicodeList" text="Export Unicodes" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadUnicodeList" text="Import Unicodes" />
+                    </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <SplitPane dividerPositions="0.5618729096989966" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <ScrollPane layoutX="2.0" layoutY="4.0" prefHeight="369.0" prefWidth="332.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <ImageView fx:id="imageview" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea fx:id="textarea" onKeyReleased="#setModified" prefHeight="200.0" prefWidth="200.0" promptText="Transcribe here..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Junicode" size="16.0" />
+                           </font></TextArea>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </center>
+         <bottom>
+            <ToolBar prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <items>
+                  <Label fx:id="zoom" disable="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></Label>
+               </items>
+            </ToolBar>
+         </bottom>
+         <right>
+            <ToolBar maxWidth="200.0" orientation="VERTICAL" prefWidth="200.0">
+              <items>
+                  <AnchorPane maxWidth="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="BOTTOM_CENTER" maxWidth="200.0" prefWidth="200.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <TextField fx:id="textField" onAction="#insertUnicode" promptText="Type Unicode here...">
+                                 <font>
+                                    <Font name="Andron Scriptor Web" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#insertUnicode" text="Einfügen">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <VBox fx:id="buttonBox" alignment="TOP_RIGHT" maxWidth="200.0" prefWidth="200.0" spacing="2.0" />
+              </items>
+            </ToolBar>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>
